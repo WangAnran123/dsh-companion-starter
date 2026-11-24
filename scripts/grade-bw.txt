@@ -1,0 +1,20 @@
+[0:v]fps=30,zoompan=z='1+0.000016*on':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,hue=s=0,curves=all='0/0 0.18/0.12 0.45/0.44 0.72/0.78 1/1',split=2[base][bs];
+[bs]gblur=sigma=14,eq=brightness=0.06:contrast=0.9[bloom];
+[base][bloom]blend=all_mode=screen:all_opacity=0.20[lit];
+[lit]noise=alls=8:allf=t+u[n1];
+[n1]vignette=angle=PI/4.6[n2];
+[n2]drawbox=x=18:y=18:w=1044:h=1884:color=white@0.10:t=2[n3];
+[n3]drawbox=x=0:y=0:w=1080:h=1920:color=white@0.9:t=fill:enable='between(t,3.17,3.22)'[f1];
+[f1]drawbox=x=0:y=0:w=1080:h=1920:color=white@0.9:t=fill:enable='between(t,6.77,6.82)'[f2];
+[f2]drawbox=x=0:y=0:w=1080:h=1920:color=white@0.9:t=fill:enable='between(t,11.97,12.02)'[f3];
+[f3]drawbox=x=0:y=0:w=1080:h=1920:color=white@0.9:t=fill:enable='between(t,33.37,33.42)'[f4];
+[f4]drawbox=x=0:y=0:w=1080:h=1920:color=white@0.9:t=fill:enable='between(t,49.17,49.22)'[f5];
+[f5]drawbox=x=64:y=1678:w=5:h=100:color=white@0.6:t=fill:enable='between(t,0.45,4.4)'[l0];
+[l0]drawtext=fontfile=mono.ttf:text='OPEN SOURCE · MIT':fontcolor=0xD8D8D8:x=88:y=1686:fontsize=26:enable='between(t,0.45,4.4)'[l1];
+[l1]drawtext=fontfile=font.ttf:text='dsh-companion-starter':fontcolor=0xF2F2F2:x=88:y=1720:fontsize=36:enable='between(t,0.45,4.4)'[l2];
+[l2]drawtext=fontfile=mono.ttf:text='2026 · ALL OPEN SOURCE':fontcolor=0x9A9A9E:x=88:y=1768:fontsize=24:enable='between(t,0.45,4.4)'[l3];
+[l3]drawbox=x=64:y=1678:w=5:h=100:color=white@0.6:t=fill:enable='between(t,50.1,52.45)'[e0];
+[e0]drawtext=fontfile=font.ttf:text='关注我 · 教你怎么装':fontcolor=0xF2F2F2:x=88:y=1690:fontsize=44:enable='between(t,50.1,52.45)'[e1];
+[e1]drawtext=fontfile=mono.ttf:text='GITHUB · dsh-companion-starter':fontcolor=0x9A9A9E:x=88:y=1744:fontsize=26:enable='between(t,50.1,52.45)'[e2];
+[e2]fade=t=in:st=0:d=0.65:color=black[fadein];
+[fadein]fade=t=out:st=51.9:d=0.83:color=black[vout]

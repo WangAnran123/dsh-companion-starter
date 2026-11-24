@@ -25,6 +25,7 @@ import { registerQqTools } from './capabilities-qq.js'
 import { registerProactiveTools } from './capabilities-proactive.js'
 import { registerMemoryTools } from './capabilities-memory.js'
 import { registerDouyinTools } from './capabilities-douyin.js'
+import { registerLearnTools } from './capabilities-learn.js'
 
 export const name = 'companion-onboard'
 export const inject = ['tools']
@@ -352,4 +353,5 @@ export function apply(ctx) {
   registerProactiveTools(tool)
   registerMemoryTools(tool)
   registerDouyinTools(tool)
+  registerLearnTools(tool)
 }

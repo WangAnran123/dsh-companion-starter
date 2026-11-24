@@ -140,3 +140,30 @@ MIT
 | `companion_video_make` | 用 HyperFrames 在指定目录搭片并直接渲染 mp4 |
 
 实测：五套检测 5/5 就位；`companion_video_make` 从空目录到出片 33.6 秒。
+
+---
+
+## 素材库优先（重要约定）
+
+做视频**先拿现成的，别手搓**。插件里有一整套素材库工作流：
+
+| 库 | 里面有什么 | 怎么用 |
+|---|---|---|
+| **HyperFrames 特效库** | 约 450 个动效块/组件：转场、故障、3D、数据图表、聊天卡、动力学标题、字幕样式 | `npx hyperframes catalog --query "<英文关键词>"` 找 → `npx hyperframes add <名字>` 装进 `compositions/` |
+| **media-use 音效库** | 19 个现成音效：whoosh / impact-bass / glitch / typing / ping / pop / riser / sparkle / chime | 直接引 `~/.agents/skills/media-use/audio/assets/sfx/*.mp3` |
+| **media-use 调色库** | LUT 索引（`luts/index.json`） | 套在画面上做统一色调 |
+| **OpenFilm 素材** | `npx -y openfilm@latest get` 拉音乐/音效/贴纸 | 需要 OpenFilm 时才用 |
+
+对应工具：
+- `companion_video_library` —— **做视频第一步**：盘点本机三个库有什么（返回条目数、位置、已验证可用的块名）
+- `companion_video_registry_fix` —— 特效库在墙内连不上时先跑它（自动切 gh-proxy）
+- `companion_video_make` —— 搭片 + 渲染
+
+**已验证可直接用的块**（实测跑通过）：
+`ai-chat-reveal`（竖屏聊天流式回答 + 结尾卡，文案用变量灌）、`mk-specs-list`（特性清单，改 CONFIG.rows）、
+`mk-progress-stat`（大数字 + 进度条）、`glass-hero`（玻璃折射大标题）、`glitch`（故障转场）、
+`caption-kinetic-slam`（满屏单词砸屏，钩子用）、`number-pop-in`（数字逐位 pop，可多实例）
+
+**两个必踩的坑**（写在这里省你时间）：
+1. 块里的 GSAP 默认走 `cdn.jsdelivr.net`，国内会 ECONNRESET —— 装完把 `<script src>` 换成本地 `gsap.min.js`
+2. `<audio>` 必须带 `id`，否则渲染器发现不了，成片静音

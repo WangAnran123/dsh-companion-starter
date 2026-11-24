@@ -172,7 +172,7 @@ export function registerCapabilityTools(tool) {
   // ── HyperFrames 出片 ───────────────────────────────────────────────
   tool({
     name: 'companion_video_make',
-    description: '在一个目录里搭一段 HyperFrames 短片并渲染成 mp4：没项目就建骨架、写三幕（钩子/要点/结尾卡）、跑 check，最后渲染。返回 mp4 路径。耗时通常 1-3 分钟。',
+    description: '在一个目录里搭一段 HyperFrames 短片并渲染成 mp4。★素材库优先：先调 companion_video_library 看特效库和音效库里有什么，用 npx hyperframes add <块名> 装现成动效块、从 media-use 音效库取音效；库里确实没有的才手写场景。没项目就建骨架，跑 check 再渲染。耗时通常 1-3 分钟。',
     parameters: {
       type: 'object',
       properties: {

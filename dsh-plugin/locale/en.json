@@ -1,0 +1,7 @@
+﻿{
+  "meta": {
+    "title": "Companion onboarding",
+    "description": "Guided setup for a local AI companion: create persona and memory files, fill them section by section, check the environment, and install the QQ plugins that ship with this bundle.",
+    "detail": "docs/DETAIL.md"
+  }
+}

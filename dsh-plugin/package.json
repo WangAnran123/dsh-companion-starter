@@ -1,0 +1,27 @@
+﻿{
+  "name": "dsh-companion-onboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Guided setup for a local AI companion: persona/memory files, QQ plugins, environment doctor.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "templates",
+    "astrbot-plugins",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

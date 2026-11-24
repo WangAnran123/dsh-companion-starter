@@ -87,3 +87,32 @@ $env:BREEZE_VOICE_ID = 'voc_xxxxxxxxxx'
 ## License
 
 MIT
+
+---
+
+## 在 DSH 里一键装（推荐）
+
+这个仓库同时是一个 **DSH 插件包**（`dsh-plugin/`）。装进 DSH 之后，**DSH 会自己一步步问你、自己写文件**，
+不用手动抄模板：
+
+| 工具 | 作用 |
+|---|---|
+| `companion_status` | 现在到哪一步、下一步做什么（引导主入口） |
+| `companion_init` | 建人格文件与记忆文件（不覆盖已有） |
+| `companion_set_persona` | 逐节填：称呼 / 身份 / 说话方式 / 边界 / 偏好 |
+| `companion_add_memory` | 往长期记忆追加一行 |
+| `companion_doctor` | 环境体检（Python / Node / 浏览器 / AstrBot / 语音 Key） |
+| `companion_install_qq` | 把随包的两个 AstrBot 插件装进检测到的实例 |
+
+**装法（二选一）**：
+
+1. **GUI**：DSH → 设置 → **插件** → **添加插件** → 选这个仓库里的 `dsh-plugin` 目录 → 重启 DSH
+2. **命令**：让 DSH 里的 AI 执行 `plugin_manager` 的 `install_bundle`，target 填 `dsh-plugin` 的绝对路径
+
+装完开一句「帮我把伙伴配起来」，它会先跑 `companion_status`，然后一次只问你一个问题。
+
+> ⚠️ 装的时候要把 DSH 关掉再重开：DSH 运行时 profile 的 `node_modules` 被锁，
+> pnpm 会报 `EPERM ... sherpa-onnx`，这是已知现象，不是插件坏了。
+
+数据默认放在 `~/.dsh/shared/companion/`（`persona-core.md` + `memory.md`），
+换位置设环境变量 `DSH_COMPANION_DIR`。

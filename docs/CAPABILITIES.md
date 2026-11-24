@@ -1,6 +1,6 @@
 # 能力清单（v1.1.0）
 
-装完 `install\quickstart.ps1` 之后，模型可以调用 **31 个工具**。按能力分成七组。
+装完 `install\quickstart.ps1` 之后，模型可以调用 **40 个工具**。按能力分成八组。
 
 ---
 
@@ -36,13 +36,28 @@
 
 | 工具 | 干什么 |
 | --- | --- |
-| `companion_install_qq` | 把两个 AstrBot 插件（语音推送 / 文件投递）拷进实例 |
+| `companion_install_qq` | 把三个 AstrBot 插件（语音 / 文件投递 / **收件箱**）拷进实例 |
+| `companion_qq_setup_wizard` | **装机向导**：检测 AstrBot → 确认目录 → 装插件 → 填会话 → 发测试消息，一步一问答 |
 | `companion_qq_status` | AstrBot 在哪、插件装了没、投递箱有几条待发 |
 | `companion_qq_send` | 发文字 / 发文件（走 AstrBot 投递箱，5 秒内送达） |
+| `companion_qq_sticker` | 发**表情包**：从表情包目录（子目录当分类）挑一张图发出去 |
+| `companion_qq_inbox` | **读收到的图片 / 语音 / 视频**：返回本地路径，图片可直接看、视频可抽帧 |
 | `companion_qq_configure` | 指定插件目录 / 投递箱位置 |
 
 > 原理：往投递箱丢 `*.send` 文件（第一行文件路径、第二行说明），AstrBot 插件轮询发送。
 > 不需要 AstrBot 的 HTTP API 鉴权，也不会动登录态。
+
+### 三个随包 AstrBot 插件
+
+| 插件 | 方向 | 干什么 |
+| --- | --- | --- |
+| `astrbot_plugin_breeze_tts` | 出 | Breeze 云端 TTS 服务商（配好 Key + 音色后，回复可带语音） |
+| `astrbot_plugin_file_push` | 出 | 投递箱：扫 `*.send` → 发文字 / 图片 / 文件 |
+| `astrbot_plugin_qq_inbox` | **入** | 收到的图片 / 语音 / 视频落盘到 `~/.dsh/shared/inbox` + 写 `index.jsonl` |
+
+> **语音**：走 Breeze **云端** TTS（要 API Key、可能计费），不是本地离线音色。
+> **表情包**：走图片消息（QQ 里显示为图片），发不了 QQ 原生表情 / 表情商店包。
+> **收件箱**：唯一「往回收」的通道；没有它机器人看不见你发的图。
 
 ## 5. 主动关心
 

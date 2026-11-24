@@ -25,7 +25,7 @@ export const inject = ['tools']
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TEMPLATES = join(HERE, 'templates')
-const ASTRBOT_BUNDLES = join(HERE, 'astrbot-plugins')
+const ASTRBOT_BUNDLES = [join(HERE, 'astrbot-plugins'), join(HERE, '..', 'plugins', 'astrbot')].find((p) => existsSync(p)) || join(HERE, 'astrbot-plugins')
 const BASE = process.env.DSH_COMPANION_DIR || join(homedir(), '.dsh', 'shared', 'companion')
 const PERSONA = () => join(BASE, 'persona-core.md')
 const MEMORY = () => join(BASE, 'memory.md')
@@ -43,6 +43,10 @@ const textOutput = {
 const safe = (v) => {
   if (v === undefined || v === null) return null
   try { return JSON.parse(JSON.stringify(v)) } catch { return String(v) }
+}
+
+function readFileSyncSafe(p) {
+  try { return readFileSync(p, 'utf8') } catch { return null }
 }
 
 function readIf(p) {
@@ -77,7 +81,7 @@ function filledSections(md) {
 
 function memoryCount(md) {
   if (!md) return 0
-  return md.split('\n').filter((l) => /^\s*-\s*\[/.test(l)).length
+  return md.split('\n').filter((l) => /^\s*-\s*\[\d{4}-\d{2}-\d{2}\]\s*\[/.test(l)).length
 }
 
 function run(cmd, args) {
@@ -301,11 +305,21 @@ export function apply(ctx) {
 
       for (const b of bundles) {
         const src = join(ASTRBOT_BUNDLES, b)
-        const dst = join(target, b)
         try {
           if (!statSync(src).isDirectory()) continue
+          // AstrBot 认目录名 = 插件 id：优先用 metadata.yaml 里的 name
+          let id = b
+          try {
+            const meta = readFileSyncSafe(join(src, 'metadata.yaml'))
+            const m = meta && meta.replace(/^\uFEFF/, '').match(/^name:\s*([A-Za-z0-9_.-]+)/m)
+            if (m) id = m[1]
+          } catch { /* 没有 metadata 就用目录名 */ }
+          const dst = join(target, id)
           mkdirSync(dst, { recursive: true })
-          for (const f of readdirSync(src)) copyFileSync(join(src, f), join(dst, f))
+          for (const f of readdirSync(src)) {
+            const sp = join(src, f)
+            if (statSync(sp).isFile()) copyFileSync(sp, join(dst, f))
+          }
           copied.push(dst)
         } catch (e) {
           failed.push({ bundle: b, error: String(e?.message || e) })

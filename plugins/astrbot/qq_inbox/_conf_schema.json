@@ -1,0 +1,17 @@
+﻿{
+  "inbox_dir": {
+    "type": "string",
+    "description": "收件箱目录（DSH 侧 companion_qq_inbox 默认也读这里）",
+    "default": "~/.dsh/shared/inbox"
+  },
+  "max_mb": {
+    "type": "int",
+    "description": "单个文件上限（MB），超过就跳过",
+    "default": 50
+  },
+  "only_from_qq": {
+    "type": "string",
+    "description": "只收这个 QQ 号发来的（留空 = 都收）",
+    "default": ""
+  }
+}

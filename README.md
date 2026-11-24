@@ -128,3 +128,15 @@ MIT
 
 抖音那个包刻意不给代码：自动操作第三方平台通常违反其协议，轻则限流重则封号，
 把代码塞进"开箱即用"包里等于把风险转嫁给不知情的人。想要的人明确确认后自己接。
+
+### 视频能力（五套，可选装）
+
+插件里有两个工具专门管「五套视频能力」，装的是 skill（不是代码）：
+
+| 工具 | 作用 |
+|---|---|
+| `companion_video_skills` | 查 HyperFrames / Remotion / Shortcraft / a2e / Talkcraft 五套在不在，缺哪套 |
+| `companion_video_install` | 缺的一键装（走官方 `npx skills add`，装到 `~/.agents/skills`） |
+| `companion_video_make` | 用 HyperFrames 在指定目录搭片并直接渲染 mp4 |
+
+实测：五套检测 5/5 就位；`companion_video_make` 从空目录到出片 33.6 秒。

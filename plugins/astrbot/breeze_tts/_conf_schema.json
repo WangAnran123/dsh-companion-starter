@@ -1,4 +1,4 @@
-﻿{
+{
   "voice_id": {
     "type": "string",
     "description": "Breeze 后台捏好的音色 id（voc_xxxxxxxxxx）",

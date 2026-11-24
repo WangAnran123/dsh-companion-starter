@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "title": "Douyin integration (optional, risky)",
     "description": "Opt-in scaffold for Douyin integration. Ships NO automation code: it only states the platform risks, records your explicit acknowledgement, and checks local prerequisites. Automating a third-party platform can violate its terms and get accounts limited or banned.",

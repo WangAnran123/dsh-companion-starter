@@ -1,4 +1,4 @@
-﻿{
+{
   "session": {
     "type": "string",
     "description": "目标会话，形如 qq:FriendMessage:123456789",

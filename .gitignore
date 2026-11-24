@@ -1,0 +1,17 @@
+﻿# 密钥与个人数据
+*.key
+breeze_key.txt
+.env
+persona/persona-core.md
+persona/memory.md
+# Python
+__pycache__/
+*.pyc
+.venv/
+# 日志与临时
+*.log
+tmp/
+data/
+# 系统
+.DS_Store
+Thumbs.db

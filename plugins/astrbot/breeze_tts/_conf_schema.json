@@ -1,0 +1,17 @@
+﻿{
+  "voice_id": {
+    "type": "string",
+    "description": "Breeze 后台捏好的音色 id（voc_xxxxxxxxxx）",
+    "default": ""
+  },
+  "model": {
+    "type": "string",
+    "description": "模型 id",
+    "default": "breeze-tts-2"
+  },
+  "api_key_file": {
+    "type": "string",
+    "description": "存 API Key 的文本文件（一行 key）",
+    "default": "~/.breeze/breeze_key.txt"
+  }
+}

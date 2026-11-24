@@ -1,0 +1,9 @@
+﻿name: astrbot_plugin_file_push
+display_name: 文件投递箱（推送到 QQ）
+short_desc: 往目录里丢个 .send 文件，插件自动把文件/图片发到你的 QQ
+desc: >
+  每 5 秒扫一次 outbox 目录，*.send 第一行是文件路径、第二行是说明文字，
+  发完改名 .sent。适合脚本/定时任务/AI 往外推图。
+version: 1.0.0
+author: dsh-companion-starter
+repo: https://github.com/your-name/dsh-companion-starter

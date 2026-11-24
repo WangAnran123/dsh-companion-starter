@@ -1,0 +1,6 @@
+﻿name: astrbot_plugin_qq_inbox
+display_name: QQ 收件箱（给 DSH 读）
+desc: 把收到的图片/语音/视频/文件落盘到 ~/.dsh/shared/inbox，DSH 侧用 companion_qq_inbox 读取
+version: 1.0.0
+author: dsh-companion-starter
+repo: https://github.com/WangAnran123/dsh-companion-starter

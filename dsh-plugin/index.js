@@ -21,6 +21,10 @@ import { execFile } from 'node:child_process'
 import { registerCapabilityTools } from './capabilities.js'
 import { registerVideoSkillTools } from './capabilities-video.js'
 import { registerRegistryFixTool } from './registry-fix.js'
+import { registerQqTools } from './capabilities-qq.js'
+import { registerProactiveTools } from './capabilities-proactive.js'
+import { registerMemoryTools } from './capabilities-memory.js'
+import { registerDouyinTools } from './capabilities-douyin.js'
 
 export const name = 'companion-onboard'
 export const inject = ['tools']
@@ -344,4 +348,8 @@ export function apply(ctx) {
   registerCapabilityTools(tool)
   registerVideoSkillTools(tool)
   registerRegistryFixTool(tool)
+  registerQqTools(tool)
+  registerProactiveTools(tool)
+  registerMemoryTools(tool)
+  registerDouyinTools(tool)
 }

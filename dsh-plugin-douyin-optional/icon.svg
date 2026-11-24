@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Douyin optional module">
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="#141414"/>
+  <path d="M52 36v40a14 14 0 1 1-10-13.4V50a26 26 0 1 0 22 25.7V52c6 5 13 8 21 8V44c-12 0-21-8-21-21h-12z" fill="#ff4d6d"/>
+  <circle cx="96" cy="96" r="14" fill="#ffb85c"/>
+  <path d="M92 96h8M96 92v8" stroke="#141414" stroke-width="3" stroke-linecap="round"/>
+</svg>

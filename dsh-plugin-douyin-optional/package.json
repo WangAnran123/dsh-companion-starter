@@ -1,0 +1,11 @@
+﻿{
+  "name": "dsh-companion-douyin-optional",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Optional, risk-acknowledged Douyin integration scaffold. Read-only checks only; automation is not shipped.",
+  "main": "index.js",
+  "exports": { ".": "./index.js", "./locale/*.json": "./locale/*.json", "./icon": "./icon.svg" },
+  "files": ["index.js", "cordis.patch.yml", "locale/*.json", "docs", "icon.svg"],
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

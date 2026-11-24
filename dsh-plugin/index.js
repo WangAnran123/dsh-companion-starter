@@ -18,13 +18,14 @@ import { join, dirname } from 'node:path'
 import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { execFile } from 'node:child_process'
+import { registerCapabilityTools } from './capabilities.js'
 
 export const name = 'companion-onboard'
 export const inject = ['tools']
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TEMPLATES = join(HERE, 'templates')
-const ASTRBOT_BUNDLES = join(HERE, '..', 'plugins', 'astrbot')
+const ASTRBOT_BUNDLES = join(HERE, 'astrbot-plugins')
 const BASE = process.env.DSH_COMPANION_DIR || join(homedir(), '.dsh', 'shared', 'companion')
 const PERSONA = () => join(BASE, 'persona-core.md')
 const MEMORY = () => join(BASE, 'memory.md')
@@ -313,4 +314,7 @@ export function apply(ctx) {
       return safe({ ok: failed.length === 0, target, copied, failed, note: '拷完后重启 AstrBot，日志里应出现 [breeze_tts] 已注册 与 [file_push] 投递箱已启动' })
     },
   })
+
+  // 可选能力：Blender 渲染 / HyperFrames 出片
+  registerCapabilityTools(tool)
 }

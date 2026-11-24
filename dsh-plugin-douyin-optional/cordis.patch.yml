@@ -1,0 +1,4 @@
+﻿- insert:
+    - id: companion-douyin-optional
+      name: dsh-companion-douyin-optional
+      config: {}

@@ -40,3 +40,20 @@ memory.md         长期记忆（一行一条）
 - 检测不到 AstrBot 时不会瞎猜路径，会明确报错让你给 `pluginDir`。
 - QQ 侧插件装完需要**重启 AstrBot** 才生效。
 - 平台自动化（抖音等）不在本包范围内：风险和失效问题见主仓库的 `docs/OPTIONAL-AUTOMATION.md`。
+
+## 可选能力（需要本机装着对应软件）
+
+| 工具 | 作用 | 依赖 |
+|---|---|---|
+| `companion_blender_doctor` | 找 Blender、报版本 | Blender 4.x（设 `BLENDER_EXE` 或装在默认目录） |
+| `companion_blender_render` | 后台跑 Python 脚本渲染/导出，返回退出码与日志尾巴 | 同上 |
+| `companion_video_doctor` | 查 Node ≥22 与 HyperFrames CLI | Node + `npx hyperframes init` |
+| `companion_video_make` | 在指定目录搭三幕短片（钩子/要点/结尾卡）→ check → 渲染 mp4 | 同上；单次约 30 秒到几分钟 |
+
+三个设计约束：
+1. **找不到就明说缺什么、去哪装**，不假装成功。
+2. **渲染走异步子进程**，绝不阻塞 DSH 宿主（同步跑 Blender 会把整个界面卡死）。
+3. **结果可验证**：返回退出码、stderr 尾巴、产物路径。
+
+> 实测（本机 Windows / Blender 4.5.9 LTS / Node 26）：`companion_blender_render` 跑一次 4 秒返回 exit 0；
+> `companion_video_make` 从建目录到出 mp4 共 33.6 秒，check 通过。

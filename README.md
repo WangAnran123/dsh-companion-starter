@@ -1,5 +1,24 @@
 # dsh-companion-starter
 
+> 把你自己的「AI 伙伴」搭起来：桌面大脑 + QQ + 语音 + 记忆 + 文件推送。
+> 仓库只给**结构和胶水**，人格和记忆是空模板，填成你自己的。
+
+## 三步就能跑（Windows）
+
+```powershell
+# 1. 下载仓库（或解压 zip），进到仓库根目录
+# 2. 一条命令装进你的 DSH
+powershell -ExecutionPolicy Bypass -File install\quickstart.ps1
+# 3. 重启 DSH，新建会话，对它说：帮我搭个 AI 伙伴
+```
+
+它会先跑体检（Python / Node / 浏览器 / AstrBot / 语音 Key），再一步步问你要人格和记忆。
+**不想装了**：`powershell -ExecutionPolicy Bypass -File install\quickstart.ps1 -Uninstall`
+
+装了什么、怎么装的手工步骤、每个工具干什么，见 [docs/SETUP-WINDOWS.md](docs/SETUP-WINDOWS.md)。
+没有 DSH？先去装：<https://github.com/deepseek-ai/deepseek-harness>
+
+---
 > 把一个「住在你电脑里的 AI 伙伴」搭起来的骨架：桌面大脑 + QQ + 语音 + 记忆 + 文件推送。
 > 这个仓库只给你**结构和胶水**，不带你自己的记忆和人格——那两样是空模板，填成你自己的。
 

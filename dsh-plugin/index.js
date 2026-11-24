@@ -123,10 +123,19 @@ export function apply(ctx) {
   tool({
     name: 'companion_status',
     description: '查看「AI 伙伴」搭建到哪一步了：人格/记忆文件是否存在、哪些小节还空着、AstrBot 与插件是否就位，并给出下一步该做什么。开始引导、或用户问「还差什么」时先调它。',
-    parameters: { type: 'object', properties: {}, additionalProperties: false },
-    async execute() {
-      const personaMd = readIf(PERSONA())
-      const memoryMd = readIf(MEMORY())
+    parameters: {
+      type: 'object',
+      properties: {
+        dir: { type: 'string', description: '伙伴数据目录，默认 ~/.dsh/shared/companion（要和 companion_init 用的同一个）' },
+      },
+      additionalProperties: false,
+    },
+    async execute(args) {
+      const base = args?.dir ? String(args.dir) : BASE
+      const personaPath = join(base, 'persona-core.md')
+      const memoryPath = join(base, 'memory.md')
+      const personaMd = readIf(personaPath)
+      const memoryMd = readIf(memoryPath)
       const { filled, missing } = filledSections(personaMd)
       const memCount = memoryCount(memoryMd)
       const pluginDirs = findAstrbotPluginDirs()
@@ -148,9 +157,9 @@ export function apply(ctx) {
       else next = { action: 'done', why: '基础链路齐了，可以开始把模板细节慢慢补完' }
 
       return safe({
-        base: BASE,
-        persona: { path: PERSONA(), exists: Boolean(personaMd), filled, missing },
-        memory: { path: MEMORY(), exists: Boolean(memoryMd), count: memCount },
+        base,
+        persona: { path: personaPath, exists: Boolean(personaMd), filled, missing },
+        memory: { path: memoryPath, exists: Boolean(memoryMd), count: memCount },
         qq: { astrbot, pluginDirs, installed, breezeKey: keyOk },
         next,
       })

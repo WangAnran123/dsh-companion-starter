@@ -43,6 +43,11 @@ export const DEFAULT_CONFIG = {
     maxPerDay: 3,
     minGapMinutes: 90,
   },
+  learning: {
+    /** 是否开启每日复盘（真跑起来要靠 DSH 的定时任务调 companion_review） */
+    enabled: true,
+    dailyReviewAt: '23:00',
+  },
   memory: {
     /**
      * 跨端记忆同步目标，例：

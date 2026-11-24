@@ -103,3 +103,33 @@
 
 想改哪块用对应工具改（`companion_qq_configure` / `companion_douyin_setup` /
 `companion_proactive_config` / `companion_memory_targets`），不用手写 JSON。
+
+## 8. 自主学习（记忆 ≠ 学习）
+
+记忆是「发生过什么」，学习是「因为发生过，下次做法不同」。这一组负责后者。
+
+| 工具 | 干什么 |
+| --- | --- |
+| `companion_lesson_search` | **做任务前先调它**：按关键词检索「以前踩过的坑 / 有效的做法」 |
+| `companion_lesson_add` | 存一条经验：场景 / 坑 / 下次怎么做（"下次"必须可执行，笼统的会被拒） |
+| `companion_reflect` | 一轮任务结束后的反思：值不值得留、留成什么（`save:true` 直接入库） |
+| `companion_review` | 每日复盘：今天新增的记忆 + 固化的经验 → 写成 `review/<日期>.md` |
+| `companion_learning_status` | 经验库多少条、最近复盘是哪天、今天学了什么 |
+| `companion_learning_config` | 开关 / 复盘时间（真正自动跑起来要靠 DSH 的定时任务） |
+
+### 怎么真的"自动"起来（关键一步）
+
+DSH 有定时任务，配一个每晚的复盘：
+
+1. `companion_learning_config` 设 `dailyReviewAt: "23:00"`
+2. 用 DSH 的 schedule 建一个每天 23:00 的任务，prompt 里让它：
+   读今天的会话/流水 → 跑 `companion_review` → 需要固化的用 `companion_reflect(save:true)` 入库
+3. 第二天开工：先 `companion_lesson_search`，再动手
+
+**没有这个定时任务，这套东西就只是"能记"，不会"自己长"。**
+
+### 边界
+
+- ✅ 能做的：把经验变成**下次会被检索到的文本**，越用越顺手
+- ❌ 做不到：模型权重级学习（本地不训练），也不会自己凭空变聪明
+- ⚠️ 会污染：经验写错了会影响后续判断 → 所以要"可执行"，并且允许删

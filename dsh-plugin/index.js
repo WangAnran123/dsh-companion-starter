@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url'
 import { execFile } from 'node:child_process'
 import { registerCapabilityTools } from './capabilities.js'
 import { registerVideoSkillTools } from './capabilities-video.js'
+import { registerRegistryFixTool } from './registry-fix.js'
 
 export const name = 'companion-onboard'
 export const inject = ['tools']
@@ -333,4 +334,5 @@ export function apply(ctx) {
   // 可选能力：Blender 渲染 / HyperFrames 出片
   registerCapabilityTools(tool)
   registerVideoSkillTools(tool)
+  registerRegistryFixTool(tool)
 }

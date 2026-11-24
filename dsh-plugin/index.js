@@ -9,7 +9,7 @@
  *     companion_set_persona     逐节填人格（称呼/身份/说话方式/边界/偏好）
  *     companion_add_memory      往长期记忆追加一行
  *     companion_doctor          环境体检（Python/Node/浏览器/AstrBot/密钥）
- *     companion_install_qq      把两个 AstrBot 插件装进检测到的实例
+ *     companion_install_qq      把三个 AstrBot 插件（语音/投递/收件箱）装进检测到的实例
  *   模型每次只调一个工具、问一个问题 ⇒ 天然就是「一步一步引导」。
  * ============================================================================
  */
@@ -147,7 +147,7 @@ export function apply(ctx) {
       const astrbot = pluginDirs.length > 0
       let installed = []
       if (astrbot) {
-        installed = ['astrbot_plugin_breeze_tts', 'astrbot_plugin_file_push']
+        installed = ['astrbot_plugin_breeze_tts', 'astrbot_plugin_file_push', 'astrbot_plugin_qq_inbox']
           .filter((n) => existsSync(join(pluginDirs[0], n)))
       }
       const keyOk = existsSync(breezeKeyFile())
@@ -157,7 +157,7 @@ export function apply(ctx) {
       else if (missing.length) next = { action: 'companion_set_persona', why: `人格还缺「${missing[0]}」`, section: missing[0] }
       else if (memCount === 0) next = { action: 'companion_add_memory', why: '还没有任何长期记忆，先记一条关于你的事' }
       else if (!astrbot) next = { action: 'manual', why: '没检测到 AstrBot（QQ 通道需要它），可选；不接 QQ 也可以只用桌面语音' }
-      else if (installed.length < 2) next = { action: 'companion_install_qq', why: `还缺 QQ 插件 ${2 - installed.length} 个` }
+      else if (installed.length < 3) next = { action: 'companion_install_qq', why: `还缺 QQ 插件 ${3 - installed.length} 个` }
       else if (!keyOk) next = { action: 'manual', why: `语音还没配 Key：建 ${breezeKeyFile()}，写一行 Breeze Key` }
       else next = { action: 'done', why: '基础链路齐了，可以开始把模板细节慢慢补完' }
 
@@ -301,7 +301,7 @@ export function apply(ctx) {
   // ── 6. 装 AstrBot 插件 ─────────────────────────────────────────────
   tool({
     name: 'companion_install_qq',
-    description: '把随包附带的两个 AstrBot 插件（Breeze TTS、文件投递箱）拷进检测到的 AstrBot 实例插件目录。检测不到实例时明确报错，不瞎猜路径。',
+    description: '把随包附带的三个 AstrBot 插件（Breeze TTS 语音、文件投递箱、QQ 收件箱）拷进检测到的 AstrBot 实例插件目录。检测不到实例时明确报错，不瞎猜路径。',
     parameters: {
       type: 'object',
       properties: {
@@ -341,7 +341,7 @@ export function apply(ctx) {
           failed.push({ bundle: b, error: String(e?.message || e) })
         }
       }
-      return safe({ ok: failed.length === 0, target, copied, failed, note: '拷完后重启 AstrBot，日志里应出现 [breeze_tts] 已注册 与 [file_push] 投递箱已启动' })
+      return safe({ ok: failed.length === 0, target, copied, failed, note: '拷完后重启 AstrBot，日志里应出现 [breeze_tts] 已注册、[file_push] 投递箱已启动、[qq_inbox] 收件箱已启动' })
     },
   })
 

@@ -1,0 +1,12 @@
+{
+  "session": {
+    "type": "string",
+    "description": "目标会话，形如 qq:FriendMessage:123456789",
+    "default": ""
+  },
+  "outbox_dir": {
+    "type": "string",
+    "description": "投递箱目录",
+    "default": "~/.dsh/shared/publish/outbox"
+  }
+}

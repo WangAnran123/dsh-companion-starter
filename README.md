@@ -1,5 +1,7 @@
 # dsh-companion-starter
 
+![dsh-companion-starter](docs/assets/preview.png)
+
 > 把你自己的「AI 伙伴」搭起来：桌面大脑 + QQ + 语音 + 记忆 + 文件推送。
 > 仓库只给**结构和胶水**，人格和记忆是空模板，填成你自己的。
 
